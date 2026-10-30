@@ -2,110 +2,350 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#fff5f7">
 <title>X Hashtag Monitor</title>
 
 <style>
 :root{
-  --pink:#e76d91;
-  --dark:#b9476d;
-  --soft:#fff1f5;
-  --bg:#fff9fa;
-  --text:#49343d;
-  --muted:#927e86;
-  --border:#f4dce4;
-  --white:#fff;
+--pink:#e76d91;
+--dark:#b9476d;
+--soft:#fff1f5;
+--bg:#fff9fa;
+--text:#49343d;
+--muted:#927e86;
+--border:#f4dce4;
 }
-
 *{box-sizing:border-box}
-
 body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
+margin:0;background:var(--bg);color:var(--text);
+font-family:Arial,sans-serif;
 }
-
 header{
-  background:var(--white);
-  border-bottom:1px solid var(--border);
-  padding:20px;
+background:white;border-bottom:1px solid var(--border);
+padding:20px;
 }
-
 .header-inner{
-  max-width:1100px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
+max-width:1100px;margin:auto;
+display:flex;justify-content:space-between;
+align-items:center;gap:10px;
 }
-
-.logo{
-  font-size:20px;
-  font-weight:800;
-  color:var(--dark);
-}
-
-.logo span{
-  color:var(--pink);
-}
-
+.logo{font-size:20px;font-weight:800;color:var(--dark)}
+.logo span{color:var(--pink)}
 .status{
-  font-size:12px;
-  background:#eaf8ed;
-  color:#438b56;
-  padding:8px 12px;
-  border-radius:20px;
+font-size:12px;background:#eaf8ed;color:#438b56;
+padding:8px 12px;border-radius:20px;
 }
-
-main{
-  max-width:1100px;
-  margin:30px auto;
-  padding:0 18px;
-}
-
+main{max-width:1100px;margin:30px auto;padding:0 18px}
 .welcome{
-  background:linear-gradient(135deg,#ffe5ec,#fff4f6);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:28px;
-  margin-bottom:22px;
+background:linear-gradient(135deg,#ffe5ec,#fff4f6);
+border:1px solid var(--border);
+border-radius:20px;padding:28px;margin-bottom:22px;
 }
-
-.welcome h1{
-  margin:0 0 10px;
-  font-size:27px;
-}
-
-.welcome p{
-  margin:0;
-  color:var(--muted);
-  line-height:1.6;
-}
-
+.welcome h1{margin:0 0 10px;font-size:26px}
+.welcome p{margin:0;color:var(--muted);line-height:1.6}
 .stats{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-  margin-bottom:22px;
+display:grid;grid-template-columns:repeat(2,1fr);
+gap:14px;margin-bottom:22px;
 }
-
 .stat,.card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:20px;
+background:white;border:1px solid var(--border);
+border-radius:17px;padding:20px;
 }
-
-.stat small{
-  color:var(--muted);
-}
-
+.stat small{color:var(--muted)}
 .stat strong{
-  display:block;
-  font-size:27px;
-  color:var(--dark);
-  margin-top:8px;
+display:block;font-size:27px;
+color:var(--dark);margin-top:8px;
 }
+.grid{
+display:grid;grid-template-columns:320px 1fr;gap:18px;
+}
+h2{font-size:17px;margin:0 0 16px}
+input,button{font:inherit}
+input{
+width:100%;border:1px solid var(--border);
+border-radius:11px;padding:12px;
+outline:none;margin-bottom:10px;
+}
+input:focus{border-color:var(--pink)}
+button{
+border:0;cursor:pointer;border-radius:11px;
+padding:11px 15px;font-weight:700;
+}
+.primary{background:var(--pink);color:white;width:100%}
+.primary:hover{background:var(--dark)}
+.secondary{background:var(--soft);color:var(--dark)}
+.tag-list{display:flex;flex-wrap:wrap;gap:9px}
+.tag{
+display:flex;align-items:center;gap:8px;
+background:var(--soft);color:var(--dark);
+padding:9px 11px;border-radius:30px;font-size:13px;
+}
+.remove{background:none;color:#c35a75;padding:0;font-size:17px}
+.post{border-bottom:1px solid var(--border);padding:15px 0}
+.post:last-child{border:0}
+.post-user{font-weight:bold;font-size:14px}
+.post-time{color:var(--muted);font-size:12px;margin-left:5px}
+.post-text{
+line-height:1.6;margin:10px 0;font-size:14px;
+white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.post a{color:var(--dark);font-size:13px;text-decoration:none;font-weight:bold}
+.empty{color:var(--muted);text-align:center;padding:25px 10px;font-size:14px}
+.toolbar{
+display:flex;justify-content:space-between;
+align-items:center;gap:10px;margin-bottom:14px;
+}
+footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px}
+.message{font-size:13px;color:var(--dark);margin-top:10px}
+@media(max-width:700px){
+.grid{grid-template-columns:1fr}
+.welcome h1{font-size:22px}
+.stat{padding:15px}
+.header-inner{align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="header-inner">
+<div class="logo">X <span>Hashtag Monitor</span></div>
+<div class="status">● Dashboard aktif</div>
+</div>
+</header>
+
+<main>
+
+<section class="welcome">
+<h1>Hashtag Monitor 🎀</h1>
+<p>Pantau hashtag pilihanmu dan lihat postingan yang berhasil dikumpulkan dalam satu dashboard.</p>
+</section>
+
+<section class="stats">
+<div class="stat">
+<small>Total Hashtag</small>
+<strong id="totalTags">0</strong>
+</div>
+<div class="stat">
+<small>Total Postingan</small>
+<strong id="totalPosts">0</strong>
+</div>
+</section>
+
+<div class="grid">
+
+<section class="card">
+<h2>Kelola Hashtag</h2>
+
+<input id="adminPassword" type="password" placeholder="Password admin">
+
+<input id="newTag" type="text" placeholder="Contoh: indonesia">
+
+<button class="primary" id="addButton">+ Tambahkan Hashtag</button>
+
+<div id="message" class="message"></div>
+
+<div style="height:22px"></div>
+
+<h2>Hashtag Dipantau</h2>
+<div id="tagList" class="tag-list">
+<div class="empty">Memuat hashtag...</div>
+</div>
+</section>
+
+<section class="card">
+<div class="toolbar">
+<h2 style="margin:0">Postingan Terbaru</h2>
+<button class="secondary" id="refreshButton">↻ Refresh</button>
+</div>
+
+<div id="postList">
+<div class="empty">Memuat postingan...</div>
+</div>
+</section>
+
+</div>
+</main>
+
+<footer>X Hashtag Monitor · Dashboard</footer>
+
+<script>
+const API="https://fyzfadxhaunxoclgktle.supabase.co/functions/v1/x-monitor";
+
+let hashtags=[];
+let posts=[];
+
+async function request(options={}){
+const response=await fetch(API,options);
+const data=await response.json();
+if(!response.ok)throw new Error(data.error||"Terjadi kesalahan.");
+return data;
+}
+
+function escapeHTML(value){
+return String(value??"").replace(/[&<>"']/g,c=>({
+"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+})[c]);
+}
+
+function formatDate(value){
+if(!value)return "";
+const date=new Date(value);
+if(isNaN(date))return "";
+return date.toLocaleString("id-ID",{
+dateStyle:"medium",timeStyle:"short"
+});
+}
+
+function renderTags(){
+const box=document.getElementById("tagList");
+box.innerHTML="";
+
+if(!hashtags.length){
+box.innerHTML='<div class="empty">Belum ada hashtag.</div>';
+return;
+}
+
+hashtags.forEach(tag=>{
+const item=document.createElement("div");
+item.className="tag";
+
+const name=document.createElement("span");
+name.textContent="#"+tag.tag;
+
+const button=document.createElement("button");
+button.className="remove";
+button.textContent="×";
+button.title="Hapus hashtag";
+button.onclick=()=>deleteTag(tag.id);
+
+item.append(name,button);
+box.appendChild(item);
+});
+}
+
+function renderPosts(){
+const box=document.getElementById("postList");
+box.innerHTML="";
+
+if(!posts.length){
+box.innerHTML='<div class="empty">Belum ada postingan yang dikumpulkan.</div>';
+return;
+}
+
+posts.forEach(post=>{
+const article=document.createElement("article");
+article.className="post";
+
+const user=document.createElement("div");
+user.className="post-user";
+user.textContent="@"+(post.author_username||"unknown");
+
+const time=document.createElement("span");
+time.className="post-time";
+time.textContent=formatDate(post.posted_at);
+user.appendChild(time);
+
+const content=document.createElement("div");
+content.className="post-text";
+content.textContent=post.post_text||"";
+
+article.append(user,content);
+
+if(post.post_url){
+try{
+const url=new URL(post.post_url);
+if(url.protocol==="https:"&&url.hostname==="x.com"){
+const link=document.createElement("a");
+link.href=url.href;
+link.target="_blank";
+link.rel="noopener noreferrer";
+link.textContent="Lihat postingan di X ↗";
+article.appendChild(link);
+}
+}catch(e){}
+}
+
+box.appendChild(article);
+});
+}
+
+async function loadData(){
+try{
+const data=await request();
+hashtags=data.hashtags||[];
+posts=data.posts||[];
+
+document.getElementById("totalTags").textContent=hashtags.length;
+document.getElementById("totalPosts").textContent=posts.length;
+
+renderTags();
+renderPosts();
+}catch(error){
+document.getElementById("postList").innerHTML=
+'<div class="empty">Gagal memuat data. '+escapeHTML(error.message)+'</div>';
+}
+}
+
+async function addTag(){
+const password=document.getElementById("adminPassword").value.trim();
+const tag=document.getElementById("newTag").value.trim();
+const message=document.getElementById("message");
+
+if(!password||!tag){
+message.textContent="Isi password admin dan hashtag dahulu.";
+return;
+}
+
+try{
+await request({
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({action:"add",tag,password})
+});
+
+document.getElementById("newTag").value="";
+message.textContent="Hashtag berhasil ditambahkan! 🎀";
+await loadData();
+}catch(error){
+message.textContent=error.message;
+}
+}
+
+async function deleteTag(id){
+const password=document.getElementById("adminPassword").value.trim();
+
+if(!password){
+alert("Masukkan password admin dahulu.");
+return;
+}
+
+if(!confirm("Yakin ingin menghapus hashtag ini?"))return;
+
+try{
+await request({
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({action:"delete",id,password})
+});
+await loadData();
+alert("Hashtag berhasil dihapus.");
+}catch(error){
+alert(error.message);
+}
+}
+
+document.getElementById("addButton").onclick=addTag;
+document.getElementById("refreshButton").onclick=loadData;
+document.getElementById("newTag").addEventListener("keydown",e=>{
+if(e.key==="Enter")addTag();
+});
+
+loadData();
+setInterval(loadData,30000);
+</script>
+
+</body>
+</html>
