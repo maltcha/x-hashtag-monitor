@@ -1,351 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#fff5f7">
-<title>X Hashtag Monitor</title>
-
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#fff5f8">
+<title>ZonaLead — X Lead Monitor</title>
 <style>
-:root{
---pink:#e76d91;
---dark:#b9476d;
---soft:#fff1f5;
---bg:#fff9fa;
---text:#49343d;
---muted:#927e86;
---border:#f4dce4;
-}
-*{box-sizing:border-box}
-body{
-margin:0;background:var(--bg);color:var(--text);
-font-family:Arial,sans-serif;
-}
-header{
-background:white;border-bottom:1px solid var(--border);
-padding:20px;
-}
-.header-inner{
-max-width:1100px;margin:auto;
-display:flex;justify-content:space-between;
-align-items:center;gap:10px;
-}
-.logo{font-size:20px;font-weight:800;color:var(--dark)}
-.logo span{color:var(--pink)}
-.status{
-font-size:12px;background:#eaf8ed;color:#438b56;
-padding:8px 12px;border-radius:20px;
-}
-main{max-width:1100px;margin:30px auto;padding:0 18px}
-.welcome{
-background:linear-gradient(135deg,#ffe5ec,#fff4f6);
-border:1px solid var(--border);
-border-radius:20px;padding:28px;margin-bottom:22px;
-}
-.welcome h1{margin:0 0 10px;font-size:26px}
-.welcome p{margin:0;color:var(--muted);line-height:1.6}
-.stats{
-display:grid;grid-template-columns:repeat(2,1fr);
-gap:14px;margin-bottom:22px;
-}
-.stat,.card{
-background:white;border:1px solid var(--border);
-border-radius:17px;padding:20px;
-}
-.stat small{color:var(--muted)}
-.stat strong{
-display:block;font-size:27px;
-color:var(--dark);margin-top:8px;
-}
-.grid{
-display:grid;grid-template-columns:320px 1fr;gap:18px;
-}
-h2{font-size:17px;margin:0 0 16px}
-input,button{font:inherit}
-input{
-width:100%;border:1px solid var(--border);
-border-radius:11px;padding:12px;
-outline:none;margin-bottom:10px;
-}
-input:focus{border-color:var(--pink)}
-button{
-border:0;cursor:pointer;border-radius:11px;
-padding:11px 15px;font-weight:700;
-}
-.primary{background:var(--pink);color:white;width:100%}
-.primary:hover{background:var(--dark)}
-.secondary{background:var(--soft);color:var(--dark)}
-.tag-list{display:flex;flex-wrap:wrap;gap:9px}
-.tag{
-display:flex;align-items:center;gap:8px;
-background:var(--soft);color:var(--dark);
-padding:9px 11px;border-radius:30px;font-size:13px;
-}
-.remove{background:none;color:#c35a75;padding:0;font-size:17px}
-.post{border-bottom:1px solid var(--border);padding:15px 0}
-.post:last-child{border:0}
-.post-user{font-weight:bold;font-size:14px}
-.post-time{color:var(--muted);font-size:12px;margin-left:5px}
-.post-text{
-line-height:1.6;margin:10px 0;font-size:14px;
-white-space:pre-wrap;overflow-wrap:anywhere;
-}
-.post a{color:var(--dark);font-size:13px;text-decoration:none;font-weight:bold}
-.empty{color:var(--muted);text-align:center;padding:25px 10px;font-size:14px}
-.toolbar{
-display:flex;justify-content:space-between;
-align-items:center;gap:10px;margin-bottom:14px;
-}
-footer{text-align:center;padding:30px 15px;color:var(--muted);font-size:12px}
-.message{font-size:13px;color:var(--dark);margin-top:10px}
-@media(max-width:700px){
-.grid{grid-template-columns:1fr}
-.welcome h1{font-size:22px}
-.stat{padding:15px}
-.header-inner{align-items:flex-start}
-}
-</style>
-</head>
-
+:root{--pink:#e86f98;--deep:#b94d75;--pale:#fff0f5;--bg:#fff9fb;--ink:#493541;--muted:#927e89;--line:#f2dce5;--green:#e9f8ef;--shadow:0 10px 30px #a94d7010}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:10px 14px;font-weight:700}.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:4}.topin{max-width:1180px;margin:auto;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:850;color:var(--deep)}.mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#f7a7c1,#e66c96);display:grid;place-items:center;color:white;font-size:20px;box-shadow:0 5px 15px #e86f9840}.pill{background:var(--green);color:#43835a;border-radius:30px;padding:7px 11px;font-size:12px;font-weight:700}.wrap{max-width:1180px;margin:26px auto;padding:0 20px}.hero{padding:25px 28px;border:1px solid var(--line);border-radius:23px;background:linear-gradient(120deg,#ffe4ed,#fff5f8 65%,#fff);box-shadow:var(--shadow);display:flex;justify-content:space-between;align-items:center;gap:20px}.hero h1{font-size:27px;margin:0 0 6px}.hero p{margin:0;color:var(--muted)}.hero .flower{font-size:44px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:17px 0}.stat,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}.stat{padding:17px 19px}.stat small{color:var(--muted)}.stat strong{display:block;font-size:27px;color:var(--deep);margin-top:4px}.layout{display:grid;grid-template-columns:290px 1fr;gap:17px}.panel{padding:19px}.panel h2{font-size:16px;margin:0 0 14px}.label{font-size:12px;color:var(--muted);font-weight:700;display:block;margin:12px 0 6px}input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);outline:none}input:focus,select:focus,textarea:focus{border-color:var(--pink);box-shadow:0 0 0 3px #e86f9815}.primary{background:var(--pink);color:#fff}.soft{background:var(--pale);color:var(--deep)}.ghost{background:#fff;border:1px solid var(--line);color:var(--deep)}.full{width:100%;margin-top:10px}.hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{background:var(--pale);color:var(--deep);border-radius:20px;padding:6px 9px;font-size:11px;font-weight:700}.toolbar{display:flex;gap:9px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:13px}.filters{display:flex;gap:8px;flex:1;flex-wrap:wrap}.filters input{max-width:240px}.filters select{max-width:170px}.lead{border:1px solid var(--line);border-radius:15px;padding:15px;margin:10px 0;background:#fff}.leadhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.user{font-weight:800}.date{font-size:11px;color:var(--muted);margin-left:5px}.leadtext{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.6;margin:11px 0}.meta{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.badge{font-size:10px;font-weight:800;padding:5px 8px;border-radius:20px;background:#f7f0f3;color:#735c67}.statusbaru{background:#fff1d9;color:#94601a}.statusdibalas{background:#e9f1ff;color:#41699c}.statusdeal{background:#e5f8ec;color:#367a4d}.statusskip{background:#f1eff2;color:#756d77}.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.actions button{font-size:11px;padding:8px 10px}.empty{text-align:center;padding:45px 15px;color:var(--muted)}.empty b{display:block;color:var(--ink);margin-bottom:5px}.notice{border:1px solid #f4dfb6;background:#fffaf0;color:#86652d;border-radius:12px;padding:11px 13px;font-size:12px;margin-top:13px}.msg{font-size:12px;color:var(--deep);margin-top:8px;min-height:18px}.hidden{display:none}footer{text-align:center;color:var(--muted);font-size:11px;padding:28px}.template{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}@media(max-width:800px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:22px}.hero .flower{font-size:32px}}@media(max-width:480px){.topin{padding:12px 14px}.wrap{padding:0 13px;margin:17px auto}.hero{padding:20px}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:23px}.panel{padding:15px}.filters input,.filters select{max-width:none;flex:1;min-width:130px}}
+</style></head>
 <body>
-
-<header>
-<div class="header-inner">
-<div class="logo">X <span>Hashtag Monitor</span></div>
-<div class="status">● Dashboard aktif</div>
-</div>
-</header>
-
-<main>
-
-<section class="welcome">
-<h1>Hashtag Monitor 🎀</h1>
-<p>Pantau hashtag pilihanmu dan lihat postingan yang berhasil dikumpulkan dalam satu dashboard.</p>
-</section>
-
-<section class="stats">
-<div class="stat">
-<small>Total Hashtag</small>
-<strong id="totalTags">0</strong>
-</div>
-<div class="stat">
-<small>Total Postingan</small>
-<strong id="totalPosts">0</strong>
-</div>
-</section>
-
-<div class="grid">
-
-<section class="card">
-<h2>Kelola Hashtag</h2>
-
-<input id="adminPassword" type="password" placeholder="Password admin">
-
-<input id="newTag" type="text" placeholder="Contoh: indonesia">
-
-<button class="primary" id="addButton">+ Tambahkan Hashtag</button>
-
-<div id="message" class="message"></div>
-
-<div style="height:22px"></div>
-
-<h2>Hashtag Dipantau</h2>
-<div id="tagList" class="tag-list">
-<div class="empty">Memuat hashtag...</div>
-</div>
-</section>
-
-<section class="card">
-<div class="toolbar">
-<h2 style="margin:0">Postingan Terbaru</h2>
-<button class="secondary" id="refreshButton">↻ Refresh</button>
-</div>
-
-<div id="postList">
-<div class="empty">Memuat postingan...</div>
-</div>
-</section>
-
-</div>
-</main>
-
-<footer>X Hashtag Monitor · Dashboard</footer>
-
+<header class="top"><div class="topin"><div class="brand"><div class="mark">♡</div>ZonaLead</div><div class="pill">● Dashboard pribadi</div></div></header>
+<main class="wrap">
+<section class="hero"><div><h1>Temukan calon pembeli lebih cepat ✨</h1><p>Pantau percakapan publik di X, kelola prospek, dan tindak lanjuti dari satu tempat.</p></div><div class="flower">🌷</div></section>
+<section class="stats"><div class="stat"><small>Total prospek</small><strong id="sTotal">0</strong></div><div class="stat"><small>Prospek baru</small><strong id="sNew">0</strong></div><div class="stat"><small>Sudah dibalas</small><strong id="sReplied">0</strong></div><div class="stat"><small>Deal</small><strong id="sDeal">0</strong></div></section>
+<div class="layout">
+<aside class="panel"><h2>🎯 Target pencarian</h2><span class="label">Produk yang dipantau</span><div class="chips" id="productChips"></div><span class="label">Kata indikasi beli</span><div class="chips"><span class="chip">WTB</span><span class="chip">looking for</span><span class="chip">need premium</span><span class="chip">cari akun</span><span class="chip">butuh</span><span class="chip">mau beli</span><span class="chip">ada yang jual</span></div><div class="notice">ZonaLead mengelompokkan postingan yang sudah masuk berdasarkan kata dan nama produk. Pemantauan baru tetap bergantung pada X API dan konfigurasi Edge Function.</div>
+<div class="template"><h2>💌 Template balasan</h2><span class="label">Pesan</span><textarea id="replyTemplate" rows="4">Halo! Aku bisa bantu info terkait {produk}. Kalau masih mencari, boleh DM ya 😊</textarea><button class="soft full" id="saveTemplate">Simpan template</button><div class="hint">Tombol balas akan membuka postingan di X. Pesan tidak dikirim otomatis.</div></div>
+</aside>
+<section class="panel"><div class="toolbar"><h2 style="margin:0">📌 Daftar calon pembeli</h2><div style="display:flex;gap:7px"><button class="soft" id="syncBtn">↻ Sinkronkan</button><button class="ghost" id="csvBtn">↓ CSV</button></div></div>
+<div class="filters"><input id="search" placeholder="Cari kata, akun, atau postingan…"><select id="productFilter"><option value="">Semua produk</option></select><select id="statusFilter"><option value="">Semua status</option><option>Baru</option><option>Sudah Dibalas</option><option>Deal</option><option>Skip</option></select></div><div class="msg" id="message"></div><div id="leads"><div class="empty"><b>Memuat data…</b>Mohon tunggu sebentar.</div></div>
+</section></div></main><footer>ZonaLead · Private X Lead Monitor · Data prospek disimpan pada project Supabase terhubung</footer>
 <script>
-const API="https://fyzfadxhaunxoclgktle.supabase.co/functions/v1/x-monitor";
-
-let hashtags=[];
-let posts=[];
-
-async function request(options={}){
-const response=await fetch(API,options);
-const data=await response.json();
-if(!response.ok)throw new Error(data.error||"Terjadi kesalahan.");
-return data;
-}
-
-function escapeHTML(value){
-return String(value??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-})[c]);
-}
-
-function formatDate(value){
-if(!value)return "";
-const date=new Date(value);
-if(isNaN(date))return "";
-return date.toLocaleString("id-ID",{
-dateStyle:"medium",timeStyle:"short"
-});
-}
-
-function renderTags(){
-const box=document.getElementById("tagList");
-box.innerHTML="";
-
-if(!hashtags.length){
-box.innerHTML='<div class="empty">Belum ada hashtag.</div>';
-return;
-}
-
-hashtags.forEach(tag=>{
-const item=document.createElement("div");
-item.className="tag";
-
-const name=document.createElement("span");
-name.textContent="#"+tag.tag;
-
-const button=document.createElement("button");
-button.className="remove";
-button.textContent="×";
-button.title="Hapus hashtag";
-button.onclick=()=>deleteTag(tag.id);
-
-item.append(name,button);
-box.appendChild(item);
-});
-}
-
-function renderPosts(){
-const box=document.getElementById("postList");
-box.innerHTML="";
-
-if(!posts.length){
-box.innerHTML='<div class="empty">Belum ada postingan yang dikumpulkan.</div>';
-return;
-}
-
-posts.forEach(post=>{
-const article=document.createElement("article");
-article.className="post";
-
-const user=document.createElement("div");
-user.className="post-user";
-user.textContent="@"+(post.author_username||"unknown");
-
-const time=document.createElement("span");
-time.className="post-time";
-time.textContent=formatDate(post.posted_at);
-user.appendChild(time);
-
-const content=document.createElement("div");
-content.className="post-text";
-content.textContent=post.post_text||"";
-
-article.append(user,content);
-
-if(post.post_url){
-try{
-const url=new URL(post.post_url);
-if(url.protocol==="https:"&&url.hostname==="x.com"){
-const link=document.createElement("a");
-link.href=url.href;
-link.target="_blank";
-link.rel="noopener noreferrer";
-link.textContent="Lihat postingan di X ↗";
-article.appendChild(link);
-}
-}catch(e){}
-}
-
-box.appendChild(article);
-});
-}
-
-async function loadData(){
-try{
-const data=await request();
-hashtags=data.hashtags||[];
-posts=data.posts||[];
-
-document.getElementById("totalTags").textContent=hashtags.length;
-document.getElementById("totalPosts").textContent=posts.length;
-
-renderTags();
-renderPosts();
-}catch(error){
-document.getElementById("postList").innerHTML=
-'<div class="empty">Gagal memuat data. '+escapeHTML(error.message)+'</div>';
-}
-}
-
-async function addTag(){
-const password=document.getElementById("adminPassword").value.trim();
-const tag=document.getElementById("newTag").value.trim();
-const message=document.getElementById("message");
-
-if(!password||!tag){
-message.textContent="Isi password admin dan hashtag dahulu.";
-return;
-}
-
-try{
-await request({
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({action:"add",tag,password})
-});
-
-document.getElementById("newTag").value="";
-message.textContent="Hashtag berhasil ditambahkan! 🎀";
-await loadData();
-}catch(error){
-message.textContent=error.message;
-}
-}
-
-async function deleteTag(id){
-const password=document.getElementById("adminPassword").value.trim();
-
-if(!password){
-alert("Masukkan password admin dahulu.");
-return;
-}
-
-if(!confirm("Yakin ingin menghapus hashtag ini?"))return;
-
-try{
-await request({
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({action:"delete",id,password})
-});
-await loadData();
-alert("Hashtag berhasil dihapus.");
-}catch(error){
-alert(error.message);
-}
-}
-
-document.getElementById("addButton").onclick=addTag;
-document.getElementById("refreshButton").onclick=loadData;
-document.getElementById("newTag").addEventListener("keydown",e=>{
-if(e.key==="Enter")addTag();
-});
-
-loadData();
-setInterval(loadData,30000);
-</script>
-
-</body>
-</html>
+const API='https://fyzfadxhaunxoclgktle.supabase.co/functions/v1/x-monitor';
+const PRODUCTS=['Netflix','Canva Pro','CapCut Pro','Spotify Premium','ChatGPT Plus','YouTube Premium','Prime Video','Vidio','Disney+'];
+const TERMS=['wtb','looking for','need premium','buy account','cari akun','butuh premium','mau beli','ada yang jual','mencari akun','need account','anyone selling'];
+let posts=[],hashtags=[];const statusStoreKey='zonalead_status_v1',noteKey='zonalead_notes_v1';let statuses=JSON.parse(localStorage.getItem(statusStoreKey)||'{}');let notes=JSON.parse(localStorage.getItem(noteKey)||'{}');
+const $=id=>document.getElementById(id);function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function productOf(text){let t=(text||'').toLowerCase();return PRODUCTS.find(p=>t.includes(p.toLowerCase().replace(' pro','').replace(' premium','')))||'Lainnya'}
+function isLead(p){let t=(p.post_text||'').toLowerCase();return TERMS.some(w=>t.includes(w))}
+function getStatus(p){return statuses[p.x_post_id]||'Baru'}function renderChips(){$('productChips').innerHTML=PRODUCTS.map(p=>`<span class="chip">${esc(p)}</span>`).join('');$('productFilter').innerHTML='<option value="">Semua produk</option>'+PRODUCTS.map(p=>`<option>${esc(p)}</option>`).join('')+'<option>Lainnya</option>'}
+function updateStats(list){$('sTotal').textContent=list.length;$('sNew').textContent=list.filter(p=>getStatus(p)==='Baru').length;$('sReplied').textContent=list.filter(p=>getStatus(p)==='Sudah Dibalas').length;$('sDeal').textContent=list.filter(p=>getStatus(p)==='Deal').length}
+function render(){let q=$('search').value.toLowerCase(),pf=$('productFilter').value,sf=$('statusFilter').value;let leads=posts.filter(isLead).filter(p=>{let prod=productOf(p.post_text),st=getStatus(p),hay=[p.post_text,p.author_username,p.author_name].join(' ').toLowerCase();return(!q||hay.includes(q))&&(!pf||prod===pf)&&(!sf||st===sf)});updateStats(posts.filter(isLead));if(!leads.length){$('leads').innerHTML='<div class="empty"><b>Belum ada prospek yang cocok 🌸</b>Coba ubah filter atau sinkronkan postingan dari X.</div>';return}$('leads').innerHTML=leads.map(p=>{let prod=productOf(p.post_text),st=getStatus(p),url=safeX(p.post_url),id=esc(p.x_post_id);return `<article class="lead"><div class="leadhead"><div><span class="user">@${esc(p.author_username||'unknown')}</span><span class="date">${esc(fmt(p.posted_at))}</span></div><span class="badge status${st==='Baru'?'baru':st==='Deal'?'deal':st==='Skip'?'skip':'dibalas'}">${esc(st)}</span></div><div class="leadtext">${esc(p.post_text)}</div><div class="meta"><span class="badge">${esc(prod)}</span><span class="badge">${esc(p.hashtag||'X Monitor')}</span><span class="badge">${hasIntent(p.post_text)?'Indikasi beli':'Perlu ditinjau'}</span></div><div class="actions"><select aria-label="Status lead" onchange="setStatus('${id}',this.value)"><option ${st==='Baru'?'selected':''}>Baru</option><option ${st==='Sudah Dibalas'?'selected':''}>Sudah Dibalas</option><option ${st==='Deal'?'selected':''}>Deal</option><option ${st==='Skip'?'selected':''}>Skip</option></select>${url?`<button class="soft" onclick="reply('${id}')">Balas di X ↗</button><a class="ghost" style="padding:8px 10px;border-radius:11px;text-decoration:none;color:var(--deep);font-size:11px;font-weight:700" href="${url}" target="_blank" rel="noopener">Lihat post</a>`:''}</div><input style="margin-top:9px" placeholder="Catatan pribadi…" value="${esc(notes[p.x_post_id]||'')}" onchange="setNote('${id}',this.value)"></article>`}).join('')}
+function hasIntent(t){t=(t||'').toLowerCase();return TERMS.some(w=>t.includes(w))}function fmt(v){if(!v)return '';let d=new Date(v);return isNaN(d)?'':d.toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'})}function safeX(u){try{let x=new URL(u);return x.protocol==='https:'&&['x.com','twitter.com','www.x.com','www.twitter.com'].includes(x.hostname)?x.href:''}catch{return ''}}
+window.setStatus=(id,v)=>{statuses[id]=v;localStorage.setItem(statusStoreKey,JSON.stringify(statuses));render()};window.setNote=(id,v)=>{notes[id]=v;localStorage.setItem(noteKey,JSON.stringify(notes))};window.reply=id=>{let p=posts.find(x=>x.x_post_id===id),url=safeX(p?.post_url);if(!url)return;let tpl=localStorage.getItem('zonalead_template')||$('replyTemplate').value;let msg=tpl.replaceAll('{produk}',productOf(p.post_text));window.open(url+'?s=09','_blank','noopener');};
+async function load(){try{let r=await fetch(API);let d=await r.json();if(!r.ok)throw Error(d.error||'Gagal mengambil data');posts=d.posts||[];hashtags=d.hashtags||[];$('message').textContent=`Terhubung · ${posts.length} postingan dimuat`;render()}catch(e){$('message').textContent='Belum dapat terhubung ke backend: '+e.message;$('leads').innerHTML='<div class="empty"><b>Data belum tersedia</b>Pastikan Edge Function x-monitor aktif dan dapat diakses.</div>';updateStats([])}}
+$('syncBtn').onclick=async()=>{let pass=prompt('Masukkan password admin Supabase untuk sinkronisasi:');if(!pass)return;$('message').textContent='Sedang meminta sinkronisasi…';try{let r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'sync',password:pass})});let d=await r.json();if(!r.ok)throw Error(d.error||'Sinkronisasi gagal');$('message').textContent='Sinkronisasi selesai. Memuat ulang data…';await load()}catch(e){$('message').textContent=e.message}};
+$('saveTemplate').onclick=()=>{localStorage.setItem('zonalead_template',$('replyTemplate').value);$('message').textContent='Template tersimpan di perangkat ini.'};$('replyTemplate').value=localStorage.getItem('zonalead_template')||$('replyTemplate').value;
+['search','productFilter','statusFilter'].forEach(id=>$(id).addEventListener(id==='search'?'input':'change',render));$('csvBtn').onclick=()=>{let rows=posts.filter(isLead).map(p=>[p.x_post_id,p.author_username,p.post_text,productOf(p.post_text),getStatus(p),p.post_url,p.posted_at]);let csv=[['x_post_id','username','post_text','product','status','post_url','posted_at'],...rows].map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='zonalead-leads.csv';a.click();URL.revokeObjectURL(a.href)};
+renderChips();load();setInterval(load,60000);
+</script></body></html>
