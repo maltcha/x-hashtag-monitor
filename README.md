@@ -1,25 +1,23 @@
-# ZonaLead — tahap 1
+# ZonaLead — Tanpa Login / Sinkronisasi Langsung
 
-Frontend pengembangan untuk menggantikan tampilan X Hashtag Monitor. Tetap memakai endpoint Supabase Edge Function yang sudah ada:
-`https://fyzfadxhaunxoclgktle.supabase.co/functions/v1/x-monitor`
+Paket ini menghapus prompt password dan autentikasi sesi. Saat website dibuka, dashboard langsung mengambil data. Tombol **Sinkronkan** langsung memanggil Edge Function tanpa meminta password.
 
-## Isi
-- `index.html`: dashboard ZonaLead.
-- `supabase-migration.sql`: migrasi opsional untuk kolom lead (belum diperlukan oleh frontend tahap 1).
+## Isi paket
+- `index.html` — frontend ZonaLead tanpa login/password.
+- `supabase-x-monitor-index.ts` — Edge Function `x-monitor` tanpa pemeriksaan password/token.
+- `supabase-migration.sql` — file migrasi dari paket sebelumnya (tidak perlu dijalankan ulang jika tabel sudah ada).
 
-## Fitur tahap 1
-- Membaca hashtag dan postingan dari endpoint lama.
-- Mengelompokkan postingan yang sudah terkumpul berdasarkan produk dan kata indikasi beli (Indonesia + Inggris).
-- Filter produk, status, dan pencarian teks.
-- Status dan catatan disimpan di localStorage browser (belum tersinkron lintas perangkat/database).
-- Sinkronisasi memanggil action `sync` lama; fungsi lama masih mencari hashtag `#tag`, belum menjalankan pencarian keyword WTB secara langsung.
-- CSV export dan tautan membuka post di X; tidak ada auto-reply.
+## Cara memasang
+1. Di GitHub, buka repository dan branch `zonalead-preview`.
+2. Ganti file `index.html` di root branch dengan `index.html` dari folder `zonalead-build`, lalu commit.
+3. Di Supabase Dashboard, buka **Edge Functions → x-monitor → Code**.
+4. Simpan salinan kode lama, lalu ganti seluruh isi function dengan `supabase-x-monitor-index.ts` dari paket ini dan klik **Deploy**.
+5. Pastikan Supabase Function Secrets ini tetap tersedia: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, dan `X_BEARER_TOKEN`.
+6. `ADMIN_PASSWORD` tidak lagi digunakan oleh versi ini; boleh dibiarkan tersimpan atau dihapus dari Function Secrets.
+7. Buka ulang website ZonaLead. Dashboard akan terbuka langsung dan tombol Sinkronkan tidak akan meminta password.
 
-## Penting sebelum dipasang live
-1. Ini adalah versi preview, bukan deploy otomatis.
-2. Backend lama masih memakai password admin dan CORS `*`; perlu pengamanan sebelum dipakai untuk data privat.
-3. Untuk pemantauan WTB/intent yang sesungguhnya, Edge Function perlu diperbarui agar menjalankan query kata kunci X API dan menyimpan hasil dengan deduplikasi. Tampilan tahap 1 hanya mengklasifikasikan postingan yang sudah masuk.
-4. Status dan catatan tahap 1 hanya tersimpan di browser yang sedang dipakai. Tahap backend berikutnya akan memindahkannya ke database.
+## Peringatan keamanan penting
+Versi ini sengaja membuat endpoint baca dan sinkronisasi dapat dipanggil tanpa login. Siapa pun yang mengetahui alamat endpoint dapat membaca data yang dikembalikan dan berpotensi menjalankan sinkronisasi. Jangan gunakan versi ini jika data harus benar-benar privat atau endpoint memerlukan pembatasan pemakaian. Secret Supabase dan token X tetap hanya disimpan di Supabase, jangan pernah dimasukkan ke HTML/GitHub atau dikirim lewat chat.
 
-## Cara preview
-Buka `index.html` di browser atau deploy pada branch/preview GitHub Pages terpisah. Jangan timpa website live sebelum pengujian.
+## Catatan fungsi
+Paket ini hanya menghapus login/password. Ini tidak mengubah pencarian hashtag menjadi pencarian keyword WTB; backend tetap menjalankan fungsi pencarian yang sudah ada sampai fitur pencarian lead dikembangkan terpisah.
